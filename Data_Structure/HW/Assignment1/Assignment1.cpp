@@ -33,7 +33,7 @@ weight add_weight(weight w1, weight w2){
 }
 
 bool less_than(weight w1, weight w2){
-    if(w1.get_weight() > w2.get_weight()) // w1 is bigger than w2
+    if(w1.get_weight() < w2.get_weight()) // w1 is bigger than w2
         return true; // true == 1
     else 
         return false; // false == 0
