@@ -9,18 +9,18 @@ class weight{
         int get_weight();
 };
 
-void weight::set_weight(int n1, int n2)
+void weight::set_weight(int n1, int n2) // use scope resolution operator
 {
     kg = n1;
     gram = n2;
 }
 
-int weight::get_weight()
+int weight::get_weight() // use scope resolution operator
 {
     return kg * 1000 + gram;
 }
 
-weight add_weight(weight w1, weight w2){
+weight add_weight(weight w1, weight w2){ 
     weight W;
     int totalWeight, kg, g;
     totalWeight = w1.get_weight() + w2.get_weight();
