@@ -1,4 +1,4 @@
-#include<iostream>
+#include<iostream> // provide input output function
 using namespace std;
 
 class weight{
@@ -22,8 +22,8 @@ int weight::get_weight() // use scope resolution operator
 
 weight add_weight(weight w1, weight w2){ 
     weight W;
-    int totalWeight, kg, g;
-    totalWeight = w1.get_weight() + w2.get_weight();
+    int totalWeight = 0, kg, g;
+    totalWeight = w1.get_weight() + w2.get_weight(); // use member function to access private variable
     kg = totalWeight / 1000;
     g = totalWeight - (kg * 1000);
 
@@ -33,7 +33,7 @@ weight add_weight(weight w1, weight w2){
 }
 
 bool less_than(weight w1, weight w2){
-    if(w1.get_weight() < w2.get_weight()) // w1 is bigger than w2
+    if(w1.get_weight() < w2.get_weight()) // check whether w1 is smaller than w2
         return true; // true == 1
     else 
         return false; // false == 0
