@@ -7,7 +7,7 @@ using namespace std;
 
 class oper_stack {
     private :
-        char s[20];
+        char s[SIZE];
         int top;
     public  :
         oper_stack();
@@ -26,6 +26,7 @@ void oper_stack::push(char x)
 {
     s[top] = x;
     top++;
+    
 }
 
 char oper_stack::pop()
@@ -68,7 +69,7 @@ int get_precedence(char op) // $는 EOS를 의미함.
 
 int main()
 {
-    string input, output;
+    string input, output, bin;
     oper_stack stack1;
     cout << "Input an infix expression to convert : ";
     cin >> input;
@@ -79,29 +80,42 @@ int main()
 
     for(int i = 0; i < input.size(); i++){
 
-        if(is_operand(input[i]) == 0){ // operand인지 check하기
+        if(is_operand(input[i])){ // operand인지 check하기
             output += input[i];
             continue;
         }
 
         if(input[i] == '('){
             stack1.push(input[i]);
-        } else if(input[i] == ')'){
-            for(int j = i; j > 0; j--){
-                if(input[j] == '(')
+            continue;
+        }
+        if(input[i] == ')'){
+            while(1){
+                if(stack1.top_element() == '('){
+                    bin += stack1.pop(); // 버리기
                     break;
-                else 
-                    stack1.pop();
+                } else {
+                    output += stack1.pop(); // '('이 나올 때까지 pop하여 출력한다.
+                }
             }
         } else {
-            
+            while(1){
+                if(get_precedence(input[i]) > get_precedence(stack1.top_element()))
+                    break;
+                output += stack1.pop();
+            }
+            stack1.push(input[i]);
         }
-        
-
-
     }
 
+    while(1){
+        if(stack1.empty()){
+            break;
+        }
+        output += stack1.pop();
+    }
 
+    cout << output;
     
     return EXIT_SUCCESS;
 }
