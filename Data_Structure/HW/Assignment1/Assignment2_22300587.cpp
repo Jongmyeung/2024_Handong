@@ -76,7 +76,7 @@ int main()
     // input += EOS; // 끝에 EOS 추가
 
     // algorithm converting infix to postfix
-    // stack1.push(EOS);
+    stack1.push(EOS);
 
     for(int i = 0; i < input.size(); i++){
 
@@ -107,14 +107,20 @@ int main()
             stack1.push(input[i]);
         }
     }
+    cout << output << endl;
 
     while(1){
         if(stack1.empty()){
             break;
         }
+
+        if(stack1.top_element() == '$'){ // 스택에 남아있는 $는 출력하지 않기 위한 코드
+            bin = stack1.pop();
+            break;
+        }
+        
         output += stack1.pop();
     }
-
     cout << output;
     
     return EXIT_SUCCESS;
