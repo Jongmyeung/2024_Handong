@@ -73,10 +73,10 @@ int main()
     oper_stack stack1;
     cout << "Input an infix expression to convert : ";
     cin >> input;
-    input += EOS; // 끝에 EOS 추가
+    // input += EOS; // 끝에 EOS 추가
 
     // algorithm converting infix to postfix
-    stack1.push(EOS);
+    // stack1.push(EOS);
 
     for(int i = 0; i < input.size(); i++){
 
