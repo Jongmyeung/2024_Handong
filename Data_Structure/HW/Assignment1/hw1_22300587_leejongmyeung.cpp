@@ -26,7 +26,6 @@ weight add_weight(weight w1, weight w2){
     totalWeight = w1.get_weight() + w2.get_weight(); // use member function to access private variable
     kg = totalWeight / 1000;
     g = totalWeight - (kg * 1000);
-
     W.set_weight(kg, g);
     
     return W;
