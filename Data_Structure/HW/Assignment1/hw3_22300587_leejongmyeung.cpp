@@ -12,12 +12,11 @@ class path_stack { // (parentheses)
         void push(char x);
         char pop();
         bool is_empty();
-        char top_element(); // 괄호 확인을 위해서
 };
 
 path_stack::path_stack() // init
 {
-    int top = 0; // 넣어야 할 위치
+    top = 0; // 넣어야 할 위치
 }
 
 void path_stack::push(char x)
@@ -40,32 +39,79 @@ bool path_stack::is_empty()
         return false;
 }
 
-char path_stack::top_element()
+int is_parenthesis(char x) // 여는 괄호인지 찾는 함수
 {
-    return (s[top--]);
+    if((x == '(') || (x == '{') || (x == '['))
+        return 0;
+    else if((x == ')') || (x == '}') || (x == ']'))
+        return 1;
+    else 
+        return 2; 
 }
 
-bool is_parentheses(char x) // 괄호인지 찾는 함수
+int is_pair(char x1, char x2)
 {
-    if((x == '(') || (x == ')') ||
-        (x == '{') || (x == '}') ||
-        (x == '[') || (x == ']'))
-        return true;
-    else
-        return false; // 괄호가 아닌 것
+    if(x2 == ')')
+        if(x1 == '(')
+            return 1;
+    if(x2 == '}')
+        if(x1 == '{')
+            return 1;
+    if(x2 == ']')
+        if(x1 == '[')
+            return 1;
+    return 0;
 }
 
-int get_pair(char pa1, char pa2){
-    
+char get_pair(char x)
+{
+    if(x == '(')
+        return ')';
+    if(x == '{')
+        return '}';
+    if(x == '[')
+        return ']';
 }
 
 int main() {
 
-    // string 선언
-    // stack 선언
-    // 문구 출력
-    // cin으로 입력 받기
+    string input, output, bin; // string 선언
+    path_stack stack1; // stack 선언
+    int check = 0;
+    cout << "Input an expression : ";
+    cin >> input; // cin으로 입력 받기
+    
+    for(int i = 0; i < input.size(); i++){
+        
+        if(is_parenthesis(input[i]) == 0) {
+            cout << input[i] << endl;
+            stack1.push(input[i]);
+        } else if (is_parenthesis(input[i]) == 1) { // 닫는 괄호인 경우
+            cout << input[i] << endl;
+            if(stack1.is_empty()){
+                check = 1;
+                output += "Error: An extra parenthesis ‘" + std::string(1, input[i]) + "’ is found.\n"; // 여는 괄호 부족한 상황 (1)
+                break;
+            }
+            char a = stack1.pop();
+            if(is_pair(a, input[i]) != 1){ 
+                check = 2;
+                output += "Error: mis-matched parenthesis, ‘" + std::string(1, get_pair(a)) + "’ is expected."; // 괄호 타입이 맞지 않음.(2)
+                break;
+            }
+        } else {
+            cout << input[i] << endl;
+            bin += input[i];
+        }
+    }
 
-    // 여는 괄호라면 스택에 넣기
-    // 닫는 괄호라면 스택에서 빼고 비교
+    if(check != 1 && check != 2)
+        if(stack1.is_empty() == 1)
+            output += "It’s a normal expression\n"; // 괄호 타입 맞음
+        else
+            output += "Closing parenthesis lack.\n"; // 닫는 괄호 부족
+
+    cout << output;
+
+    return EXIT_SUCCESS;
 }
