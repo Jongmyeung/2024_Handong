@@ -82,10 +82,12 @@ int main()
 
         if(is_operand(input[i])){ // operand인지 check하기
             output += input[i];
+            continue;
         }
 
         if(input[i] == '('){
             stack1.push(input[i]);
+            continue;
         }
         if(input[i] == ')'){
             while(1){
@@ -105,7 +107,6 @@ int main()
             stack1.push(input[i]);
         }
     }
-    cout << output << endl;
 
     while(1){
         if(stack1.empty()){
