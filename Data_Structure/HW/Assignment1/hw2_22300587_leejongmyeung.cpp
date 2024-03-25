@@ -82,12 +82,10 @@ int main()
 
         if(is_operand(input[i])){ // operand인지 check하기
             output += input[i];
-            continue;
         }
 
         if(input[i] == '('){
             stack1.push(input[i]);
-            continue;
         }
         if(input[i] == ')'){
             while(1){
