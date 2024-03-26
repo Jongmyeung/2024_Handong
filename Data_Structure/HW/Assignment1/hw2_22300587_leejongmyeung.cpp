@@ -53,10 +53,10 @@ bool is_operand(char ch)
         (ch == '%') || (ch == '$'))
         return false;
     else 
-        return true; // operandë¼ëŠ” ë§!
+        return true; // operand¶ó´Â ¸»!
 }
 
-int get_precedence(char op) // $ëŠ” EOSë¥¼ ì˜ë¯¸í•¨.
+int get_precedence(char op) // $´Â EOS¸¦ ÀÇ¹ÌÇÔ.
 {
     if((op == '$') || (op == '('))
         return (0);
@@ -73,14 +73,14 @@ int main()
     oper_stack stack1;
     cout << "Input an infix expression to convert : ";
     cin >> input;
-    // input += EOS; // ëì— EOS ì¶”ê°€
+    // input += EOS; // ³¡¿¡ EOS Ãß°¡
 
     // algorithm converting infix to postfix
     stack1.push(EOS);
 
     for(int i = 0; i < input.size(); i++){
 
-        if(is_operand(input[i])){ // operandì¸ì§€ checkí•˜ê¸°
+        if(is_operand(input[i])){ // operandÀÎÁö checkÇÏ±â
             output += input[i];
             continue;
         }
@@ -92,10 +92,10 @@ int main()
         if(input[i] == ')'){
             while(1){
                 if(stack1.top_element() == '('){
-                    bin += stack1.pop(); // ë²„ë¦¬ê¸°
+                    bin += stack1.pop(); // ¹ö¸®±â
                     break;
                 } else {
-                    output += stack1.pop(); // '('ì´ ë‚˜ì˜¬ ë•Œê¹Œì§€ popí•˜ì—¬ ì¶œë ¥í•œë‹¤.
+                    output += stack1.pop(); // '('ÀÌ ³ª¿Ã ¶§±îÁö popÇÏ¿© Ãâ·ÂÇÑ´Ù.
                 }
             }
         } else {
@@ -113,7 +113,7 @@ int main()
             break;
         }
 
-        if(stack1.top_element() == '$'){ // ìŠ¤íƒì— ë‚¨ì•„ìˆëŠ” $ëŠ” ì¶œë ¥í•˜ì§€ ì•Šê¸° ìœ„í•œ ì½”ë“œ
+        if(stack1.top_element() == '$'){ // ½ºÅÃ¿¡ ³²¾ÆÀÖ´Â $´Â Ãâ·ÂÇÏÁö ¾Ê±â À§ÇÑ ÄÚµå
             bin = stack1.pop();
             break;
         }
