@@ -84,10 +84,10 @@ int main() {
     for(int i = 0; i < input.size(); i++){
         
         if(is_parenthesis(input[i]) == 0) {
-            cout << input[i] << endl;
+            // cout << input[i] << endl;
             stack1.push(input[i]);
         } else if (is_parenthesis(input[i]) == 1) { // 닫는 괄호인 경우
-            cout << input[i] << endl;
+            // cout << input[i] << endl;
             if(stack1.is_empty()){
                 check = 1;
                 output += "Error: An extra parenthesis ‘" + std::string(1, input[i]) + "’ is found.\n"; // 여는 괄호 부족한 상황 (1)
@@ -100,7 +100,7 @@ int main() {
                 break;
             }
         } else {
-            cout << input[i] << endl;
+            // cout << input[i] << endl;
             bin += input[i];
         }
     }
