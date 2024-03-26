@@ -10,7 +10,7 @@ string reverse(string a)
     string newrev = a.erase(0, 1);
     cout << rever << " and " << newrev << endl;
     if(a.size() < 1)
-        return std::string(1, rever); // char를 string으로 / 근데 왜 a로 했을 때는 안되는걸까...
+        return std::string(1, rever);
     else
         return reverse(newrev) + rever;
         
