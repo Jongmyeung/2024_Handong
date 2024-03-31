@@ -2,7 +2,7 @@
 #include<string>
 using namespace std;
 
-#define SIZE 100 // defineì—ì„œ ; í•„ìš” ì—†ìŒ
+#define SIZE 100 // define¿¡¼­ ; ÇÊ¿ä ¾øÀ½
 
 class path_stack { // (parentheses)
     char s[SIZE];
@@ -16,7 +16,7 @@ class path_stack { // (parentheses)
 
 path_stack::path_stack() // init
 {
-    top = 0; // ë„£ì–´ì•¼ í•  ìœ„ì¹˜
+    top = 0; // ³Ö¾î¾ß ÇÒ À§Ä¡
 }
 
 void path_stack::push(char x)
@@ -39,7 +39,7 @@ bool path_stack::is_empty()
         return false;
 }
 
-int is_parenthesis(char x) // ì—¬ëŠ” ê´„í˜¸ì¸ì§€ ì°¾ëŠ” í•¨ìˆ˜
+int is_parenthesis(char x) // ¿©´Â °ıÈ£ÀÎÁö Ã£´Â ÇÔ¼ö
 {
     if((x == '(') || (x == '{') || (x == '['))
         return 0;
@@ -75,28 +75,28 @@ char get_pair(char x)
 
 int main() {
 
-    string input, output, bin; // string ì„ ì–¸
-    path_stack stack1; // stack ì„ ì–¸
+    string input, output, bin; // string ¼±¾ğ
+    path_stack stack1; // stack ¼±¾ğ
     int check = 0;
     cout << "Input an expression : ";
-    cin >> input; // cinìœ¼ë¡œ ì…ë ¥ ë°›ê¸°
+    cin >> input; // cinÀ¸·Î ÀÔ·Â ¹Ş±â
     
     for(int i = 0; i < input.size(); i++){
         
         if(is_parenthesis(input[i]) == 0) {
             // cout << input[i] << endl;
             stack1.push(input[i]);
-        } else if (is_parenthesis(input[i]) == 1) { // ë‹«ëŠ” ê´„í˜¸ì¸ ê²½ìš°
+        } else if (is_parenthesis(input[i]) == 1) { // ´İ´Â °ıÈ£ÀÎ °æ¿ì
             // cout << input[i] << endl;
             if(stack1.is_empty()){
                 check = 1;
-                output += "Error: An extra parenthesis â€˜" + std::string(1, input[i]) + "â€™ is found.\n"; // ì—¬ëŠ” ê´„í˜¸ ë¶€ì¡±í•œ ìƒí™© (1)
+                output += "Error: An extra parenthesis ¡®" + std::string(1, input[i]) + "¡¯ is found.\n"; // ¿©´Â °ıÈ£ ºÎÁ·ÇÑ »óÈ² (1)
                 break;
             }
             char a = stack1.pop();
             if(is_pair(a, input[i]) != 1){ 
                 check = 2;
-                output += "Error: mis-matched parenthesis, â€˜" + std::string(1, get_pair(a)) + "â€™ is expected."; // ê´„í˜¸ íƒ€ì…ì´ ë§ì§€ ì•ŠìŒ.(2)
+                output += "Error: mis-matched parenthesis, ¡®" + std::string(1, get_pair(a)) + "¡¯ is expected."; // °ıÈ£ Å¸ÀÔÀÌ ¸ÂÁö ¾ÊÀ½.(2)
                 break;
             }
         } else {
@@ -107,9 +107,9 @@ int main() {
 
     if(check != 1 && check != 2)
         if(stack1.is_empty() == 1)
-            output += "Itâ€™s a normal expression\n"; // ê´„í˜¸ íƒ€ì… ë§ìŒ
+            output += "It¡¯s a normal expression\n"; // °ıÈ£ Å¸ÀÔ ¸ÂÀ½
         else
-            output += "Closing parenthesis lack.\n"; // ë‹«ëŠ” ê´„í˜¸ ë¶€ì¡±
+            output += "Closing parenthesis lack.\n"; // ´İ´Â °ıÈ£ ºÎÁ·
 
     cout << output;
 
