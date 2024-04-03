@@ -16,7 +16,7 @@ class my_list {
         my_list(); // constructor
         void add_to_head(node t);
         void add_to_tail(node t);
-        void delete_from_head();
+        node delete_from_head();
         int num_nodes();
         bool list_empty();
         double score_sum();
@@ -39,10 +39,11 @@ my_list::my_list()
 void my_list::add_to_head(node t)
 {
     node *p;
-    p = new node; // cì–¸ì–´ ë©”ëª¨ë¦¬ í• ë‹¹
+    p = new node; 
     (*p) = t;
-    p->link = head; // headê°€ ê°€ë¦¬í‚¤ê³  ìˆëŠ” ê³³ copy
-    if(tail = NULL) 
+    p->link = head; // head°¡ °¡¸®Å°´Â °÷À» copy
+    head = p;
+    if(tail == NULL) 
         tail = p;
 }
 
@@ -52,7 +53,7 @@ void my_list::add_to_tail(node t)
     p = new node;
     (*p) = t;
     p->link = NULL;
-    if(tail != NULL) // tailì´ ê°€ë¦¬í‚¤ê³  ìˆëŠ” ê³³ì´ ìˆëŠ” ê²½ìš°
+    if(tail != NULL)
         tail->link = p;
      else    
         head = p;
@@ -76,7 +77,7 @@ int my_list::num_nodes()
 {
     node *t;
     int count = 0;
-    for(t = head; t != NULL; t = t->link) // ìˆœíšŒí•˜ê¸°
+    for(t = head; t != NULL; t = t->link) 
         count++;
     return count;
 }
@@ -87,4 +88,89 @@ bool my_list::list_empty()
         return true;
     else  
         return false;
+}
+
+double my_list::score_sum()
+{
+    node *t;
+    double count = 0;
+    for(t = head; t != NULL; t = t->link)
+        count += t->score;
+    return count;
+}
+
+double my_list::get_score(string t_name)
+{
+    node *t;
+    double num = 0;
+    for(t = head; t != NULL; t = t->link)
+        if(t_name.compare(t->name) == 0) // compare() == 0 ÀÌ¸é °°´Ù´Â °Í
+            num = t->score;
+    return num;
+}
+
+int my_list::remove_a_node(string t_name)
+{
+
+    node *t, *k;
+
+    if(head == NULL){
+        cout << "List is Empty ...\n";
+        return 0;
+    }
+    
+    if(head->name.compare(t_name) == 0) {
+        node *deleteNode = head;
+        head = head->link;
+        delete deleteNode;
+        return 1;
+    }
+    else {
+        k = head;
+        t = head->link;
+
+        while(t != NULL){
+            if(t->name.compare(t_name) == 0){
+                node *deleteNode = t;
+                k->link = t->link;
+                delete deleteNode;
+                return 1;
+            } else {
+                k = t;
+                t = t->link;
+            }
+        }
+    }
+}
+
+int main()
+{
+my_list a;
+node tmp;
+    tmp.set_data("Kim", 83.5);
+    a.add_to_head(tmp);
+    // cout << a.num_nodes();
+    
+    tmp.set_data("Lee", 78.2);
+    a.add_to_head(tmp);
+    // cout << a.num_nodes();
+    cout << a.num_nodes() << ":" << a.score_sum() << "\n"; // 1´Ü°è Á¡°Ë
+
+    tmp.set_data("Park", 91.3);
+    a.add_to_tail(tmp);
+    // cout << a.num_nodes() << "\n";
+
+    cout << a.num_nodes() << ":" << a.score_sum() << "\n"; // 2´Ü°è Á¡°Ë
+    tmp = a.delete_from_head();
+    cout << tmp.name << " is deleted.\n"; // 3´Ü°è Á¡°Ë
+    tmp.set_data("Choi", 85.1);
+    a.add_to_tail(tmp);
+    tmp.set_data("Ryu", 94.3);
+    a.add_to_head(tmp); 
+    cout << a.num_nodes()<< ":" << a.score_sum() << "\n"; 
+    cout << "Park??s score : " << a.get_score("Park")<< "\n"; // 4´Ü°è Á¡°Ë
+    if(a.remove_a_node("Kim") == 1)
+        cout << "Kim is deleted from the list.\n"; // 5´Ü°è Á¡°Ë
+    cout << a.num_nodes() << ":" << a.score_sum() << "\n"; // ÃÖÁ¾ Á¡°Ë
+    return 0;
 }

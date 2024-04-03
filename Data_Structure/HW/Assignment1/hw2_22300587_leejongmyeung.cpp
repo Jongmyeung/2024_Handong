@@ -53,10 +53,10 @@ bool is_operand(char ch)
         (ch == '%') || (ch == '$'))
         return false;
     else 
-        return true; // operand라는 말!
+        return true; // operand??? ??!
 }
 
-int get_precedence(char op) // $는 EOS를 의미함.
+int get_precedence(char op) // $?? EOS?? ?????.
 {
     if((op == '$') || (op == '('))
         return (0);
@@ -73,14 +73,14 @@ int main()
     oper_stack stack1;
     cout << "Input an infix expression to convert : ";
     cin >> input;
-    // input += EOS; // 끝에 EOS 추가
+    // input += EOS; // ???? EOS ???
 
     // algorithm converting infix to postfix
     stack1.push(EOS);
 
     for(int i = 0; i < input.size(); i++){
 
-        if(is_operand(input[i])){ // operand인지 check하기
+        if(is_operand(input[i])){ // operand???? check???
             output += input[i];
             continue;
         }
@@ -92,10 +92,10 @@ int main()
         if(input[i] == ')'){
             while(1){
                 if(stack1.top_element() == '('){
-                    bin += stack1.pop(); // 버리기
+                    bin += stack1.pop(); // ??????
                     break;
                 } else {
-                    output += stack1.pop(); // '('이 나올 때까지 pop하여 출력한다.
+                    output += stack1.pop(); // '('?? ???? ?????? pop??? ??????.
                 }
             }
         } else {
@@ -113,7 +113,7 @@ int main()
             break;
         }
 
-        if(stack1.top_element() == '$'){ // 스택에 남아있는 $는 출력하지 않기 위한 코드
+        if(stack1.top_element() == '$'){ // ????? ??????? $?? ??????? ??? ???? ???
             bin = stack1.pop();
             break;
         }
