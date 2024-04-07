@@ -104,13 +104,13 @@ int main()
     tmp.set_data(EOS);
     list.add_to_top(tmp);
 
-    cout << list.top_element() << "\n";
+    // cout << list.top_element() << "\n";
 
     for(int i = 0; i < input.size(); i++){
 
        
-        cout << input[i] << "\n";
-         cout << output << "\n";
+        // cout << input[i] << "\n"; // for debugging
+        // cout << output << "\n";
 
         if(is_operand(input[i])){
             output += input[i];
