@@ -154,7 +154,7 @@ int main()
         output += list.delete_from_top();
     }
 
-    cout << "Postfix is : " << output;
+    cout << "Postfix is : " << output << endl;
 
     return EXIT_SUCCESS;
     
