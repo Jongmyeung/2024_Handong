@@ -31,27 +31,42 @@ public:
 
 void my_list::insert_node(node t) {
 
-    node *p, *k;
-    p = new node;
-    (*p) = t;
-    if(head == NULL){
-        p->link = head;
-        head = p;
+    node *newNode, *k;
+    newNode = new node;
+    (*newNode) = t;
+
+    // debugging
+
+    // cout << newNode->name << " : " << newNode->score << "\n" << endl;
+    
+    // node *p; 
+    // for(p = head; p != NULL; p = p->link){
+    //     cout << p->name << " : " << p->score << endl;
+    // }
+    // cout << "\n";
+
+    if(head == NULL){ // case1 - list is empty
+        newNode->link = head;
+        head = newNode;
         return;
     } else {
-        if(head->score > p->score){
-            p->link = head;
-            head = p;
+        if(head->score > newNode->score){ // case2 - list is not empty but score in newNode is smaller than head
+            newNode->link = head;
+            head = newNode;
             return;
-        } else { // head->score 보다 p->score가 큰 경우
-            k = head;
-            while(k != NULL){
-                if(k->link != NULL && k->link->score < p->score)
-                    k = k->link;
-                else if(k->score < p->score && k->link != NULL && k->link->score > p->score)
-                    p->link = k->link->link;
-                    k->link = p;
+        } else {
+            for(k = head; k != NULL; k = k->link){
+                if(k->link == NULL){ // case3 - score in newNode is largest score in list
+                    newNode->link = NULL;
+                    k->link = newNode;
                     return;
+                } else {
+                    if(k->link->score > newNode->score) { // else
+                        newNode->link = k->link;
+                        k->link = newNode;
+                        return;
+                    }
+                }
             }
         }
     }
