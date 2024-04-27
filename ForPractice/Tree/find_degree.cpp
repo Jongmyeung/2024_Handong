@@ -144,7 +144,7 @@ int my_tree::insert_right(string tname, node tnode)
 
 void my_tree::find_n_d2(node *p)
 {
-    if (p == NULL)
+    if (p == NULL) // 만약에 p가 NULL이면 return
         return;
     else if (p->left != NULL && p->right != NULL)
     {

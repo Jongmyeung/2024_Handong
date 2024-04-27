@@ -1,8 +1,8 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
-class my_queue {
-
+class my_queue
+{
 };
 
 // void my_tree::print_data_levelorder()
@@ -24,6 +24,7 @@ class my_queue {
 //     }
 // }
 
-int main(){
+int main()
+{
     return 0;
 }
