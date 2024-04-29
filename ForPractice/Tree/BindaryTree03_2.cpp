@@ -21,7 +21,7 @@ class my_tree
 public:
     int node_count;                         // 현재 node 수
     node *root;                             // root를 가리키는 pointer
-    my_tree();                              // 초기화
+    my_tree();                              // 초기화0
     int insert_root(node t);                // root로 node내용 t추가
     int insert_left(string tname, node t);  // tname의 node 왼쪽에 t 추가
     int insert_right(string tname, node t); // tname의 node 오른쪽에 t 추가
